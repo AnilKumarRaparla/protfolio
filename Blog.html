@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anil Kumar Raparla | Software Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #111827; /* Dark Charcoal */
+            color: #d1d5db; /* Light gray text */
+            overflow-x: hidden;
+        }
+        .background-aurora {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at top, rgba(251, 191, 36, 0.1), transparent 75%),
+                        radial-gradient(ellipse at bottom, rgba(251, 146, 60, 0.1), transparent 75%);
+            animation: aurora 20s infinite alternate;
+        }
+        @keyframes aurora {
+            from { transform: rotate(0deg) scale(1.2); }
+            to { transform: rotate(360deg) scale(1.5); }
+        }
+        .nav-link {
+            @apply text-slate-300 hover:text-amber-400 transition-colors duration-300;
+        }
+        .section {
+            @apply min-h-screen flex items-center justify-center py-20 mb-24; /* Increased bottom margin */
+        }
+        .section-title {
+            @apply text-3xl md:text-4xl font-bold text-amber-400 mb-12 text-center relative;
+        }
+        .section-title::after {
+            content: '';
+            @apply w-24 h-1 bg-amber-400 absolute -bottom-3 left-1/2 -translate-x-1/2 rounded;
+            animation: pulse-glow 2s infinite alternate;
+        }
+        .glass-card {
+            background: rgba(17, 24, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(251, 191, 36, 0.1);
+            @apply rounded-lg p-6 shadow-lg;
+        }
+        .btn-primary {
+            @apply inline-block font-medium py-3 px-6 rounded-lg border border-amber-400 text-amber-400 hover:bg-amber-400/10 transition-all duration-300;
+            animation: pulse-glow 2s infinite alternate;
+        }
+        @keyframes pulse-glow {
+            from { box-shadow: 0 0 5px #fbbF24, 0 0 10px #fbbF24; }
+            to { box-shadow: 0 0 15px #f59e0b, 0 0 25px #f59e0b; }
+        }
+        .skill-card {
+            @apply bg-slate-800 p-6 rounded-lg text-center transition-all duration-500;
+            transform-style: preserve-3d;
+        }
+        .skill-card:hover {
+            transform: rotateY(180deg);
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.5);
+        }
+        .skill-card-front, .skill-card-back {
+            @apply absolute inset-0 w-full h-full flex flex-col items-center justify-center;
+            backface-visibility: hidden;
+        }
+        .skill-card-back {
+            transform: rotateY(180deg);
+        }
+        .project-card, .cert-card, .soft-skill-card {
+            @apply bg-slate-800 p-5 rounded-lg transition-all duration-300 hover:transform hover:-translate-y-1;
+            border: 1px solid transparent;
+        }
+        .project-card:hover, .cert-card:hover, .soft-skill-card:hover {
+            border-color: rgba(251, 191, 36, 0.5);
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
+        }
+        .timeline::before {
+            content: ''; position: absolute; left: 1.25rem; top: 0; bottom: 0; width: 2px; background-color: #334155;
+        }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -0.5rem; top: 0.5rem; width: 1.5rem; height: 1.5rem; border-radius: 50%; background-color: #111827; border: 3px solid #334155; transition: border-color 0.3s;
+        }
+        .timeline-item:hover::before {
+            border-color: #fbbf24;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="background-aurora"></div>
+
+    <!-- Floating Navbar -->
+    <nav class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50">
+        <div class="container mx-auto px-6 py-3 bg-slate-800/80 backdrop-blur-sm rounded-full shadow-lg">
+            <div class="flex justify-center items-center space-x-6 md:space-x-8 text-xl">
+                <a href="#home" class="nav-link" title="Home"><i class="fas fa-home"></i></a>
+                <a href="#about" class="nav-link" title="About"><i class="fas fa-user"></i></a>
+                <a href="#skills" class="nav-link" title="Skills"><i class="fas fa-cogs"></i></a>
+                <a href="#experience" class="nav-link" title="Experience"><i class="fas fa-briefcase"></i></a>
+                <a href="#education" class="nav-link" title="Education"><i class="fas fa-graduation-cap"></i></a>
+                <a href="#certifications" class="nav-link" title="Certifications"><i class="fas fa-certificate"></i></a>
+                <a href="#projects" class="nav-link" title="Projects"><i class="fas fa-project-diagram"></i></a>
+                <a href="#contact" class="nav-link" title="Contact"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Scroll to Top Button -->
+    <button id="to-top-button" class="hidden fixed z-50 bottom-20 right-5 w-12 h-12 rounded-full bg-amber-400/20 text-amber-400 hover:bg-amber-400/40 transition-colors">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Social Links Sidebar -->
+    <div class="hidden md:flex flex-col fixed top-1/2 -translate-y-1/2 left-4 space-y-4 z-40">
+        <a href="https://www.linkedin.com/in/anil-kumar-raparla/" target="_blank" rel="noopener noreferrer" class="text-2xl text-slate-400 hover:text-amber-400 transition-transform hover:scale-110"><i class="fab fa-linkedin"></i></a>
+        <a href="https://github.com/AnilKumarRaparla" target="_blank" rel="noopener noreferrer" class="text-2xl text-slate-400 hover:text-amber-400 transition-transform hover:scale-110"><i class="fab fa-github"></i></a>
+        <a href="mailto:anilkumarraparla@outlook.com" class="text-2xl text-slate-400 hover:text-amber-400 transition-transform hover:scale-110"><i class="fas fa-envelope"></i></a>
+    </div>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="section">
+            <div class="container mx-auto px-6 text-center">
+                <p class="text-lg text-amber-400 mb-4 reveal">Hi, my name is</p>
+                <h1 class="text-4xl md:text-7xl font-extrabold text-slate-100 mb-4 reveal-delay-1">Anil Kumar Raparla.</h1>
+                <h2 class="text-3xl md:text-5xl font-bold text-slate-400 mb-8 reveal-delay-2">I build things for the web.</h2>
+                <p class="max-w-3xl mx-auto text-lg text-slate-400 mb-10 reveal-delay-3">
+                    I'm a software engineer specializing in building exceptional digital experiences. Currently, I'm focused on cloud computing and developing robust, scalable applications.
+                </p>
+                <div class="reveal-delay-4">
+                    <a href="#contact" class="btn-primary">Get In Touch</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title reveal">About Me</h2>
+                <div class="grid md:grid-cols-5 gap-10 items-center">
+                    <div class="md:col-span-3 glass-card reveal-left">
+                        <p class="mb-4">
+                            Hello! I'm Anil, a software engineer based in Hyderabad. My passion for technology began during my diploma studies and has grown into a career focused on solving complex problems through code. I thrive on turning ideas into tangible, high-performance applications.
+                        </p>
+                        <p class="mb-4">
+                            My journey has led me through valuable internships, including one with IIT Kanpur's E&ICT Academy, where I significantly improved application efficiency. I also had the privilege of mentoring students in emerging technologies like Web 3.0 and Cloud Analytics as a Future Skills Expert with the AP Government.
+                        </p>
+                        <p>
+                            Here are a few technologies I've been working with recently:
+                        </p>
+                        <ul class="grid grid-cols-2 gap-2 mt-4 text-slate-300">
+                            <li class="flex items-center"><i class="fas fa-caret-right text-amber-400 mr-2"></i>Java</li>
+                            <li class="flex items-center"><i class="fas fa-caret-right text-amber-400 mr-2"></i>Python</li>
+                            <li class="flex items-center"><i class="fas fa-caret-right text-amber-400 mr-2"></i>JavaScript</li>
+                            <li class="flex items-center"><i class="fas fa-caret-right text-amber-400 mr-2"></i>SQL</li>
+                            <li class="flex items-center"><i class="fas fa-caret-right text-amber-400 mr-2"></i>Microsoft Azure</li>
+                            <li class="flex items-center"><i class="fas fa-caret-right text-amber-400 mr-2"></i>AWS</li>
+                        </ul>
+                    </div>
+                    <div class="md:col-span-2 text-center reveal-right">
+                        <div class="relative inline-block group">
+                            <img src="https://placehold.co/300x300/111827/fbbf24?text=AKR" alt="Anil Kumar Raparla" class="rounded-lg z-10 relative">
+                            <div class="absolute inset-0 border-2 border-amber-400 rounded-lg transform translate-x-4 translate-y-4 group-hover:translate-x-3 group-hover:translate-y-3 transition-transform duration-300"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title reveal">Technical Skills</h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                    <div class="skill-card reveal"><div class="skill-card-front"><i class="fab fa-java text-5xl text-amber-400 mb-3"></i><p>Java</p></div><div class="skill-card-back"><p class="font-semibold text-lg">Advanced</p></div></div>
+                    <div class="skill-card reveal-delay-1"><div class="skill-card-front"><i class="fab fa-python text-5xl text-amber-400 mb-3"></i><p>Python</p></div><div class="skill-card-back"><p class="font-semibold text-lg">Intermediate</p></div></div>
+                    <div class="skill-card reveal-delay-2"><div class="skill-card-front"><i class="fas fa-database text-5xl text-amber-400 mb-3"></i><p>SQL</p></div><div class="skill-card-back"><p class="font-semibold text-lg">Advanced</p></div></div>
+                    <div class="skill-card reveal-delay-3"><div class="skill-card-front"><i class="fab fa-js-square text-5xl text-amber-400 mb-3"></i><p>JavaScript</p></div><div class="skill-card-back"><p class="font-semibold text-lg">Intermediate</p></div></div>
+                    <div class="skill-card reveal-delay-4"><div class="skill-card-front"><i class="fab fa-html5 text-5xl text-amber-400 mb-3"></i><p>HTML</p></div><div class="skill-card-back"><p class="font-semibold text-lg">Advanced</p></div></div>
+                    <div class="skill-card reveal-delay-5"><div class="skill-card-front"><i class="fab fa-css3-alt text-5xl text-amber-400 mb-3"></i><p>CSS</p></div><div class="skill-card-back"><p class="font-semibold text-lg">Advanced</p></div></div>
+                    <div class="skill-card reveal"><div class="skill-card-front"><i class="fab fa-node-js text-5xl text-amber-400 mb-3"></i><p>Node.js</p></div><div class="skill-card-back"><p class="font-semibold text-lg">Intermediate</p></div></div>
+                    <div class="skill-card reveal-delay-1"><div class="skill-card-front"><i class="fas fa-leaf text-5xl text-amber-400 mb-3"></i><p>MongoDB</p></div><div class="skill-card-back"><p class="font-semibold text-lg">Intermediate</p></div></div>
+                    <div class="skill-card reveal-delay-2"><div class="skill-card-front"><i class="fab fa-git-alt text-5xl text-amber-400 mb-3"></i><p>Git & GitHub</p></div><div class="skill-card-back"><p class="font-semibold text-lg">Advanced</p></div></div>
+                    <div class="skill-card reveal-delay-3"><div class="skill-card-front"><i class="fab fa-aws text-5xl text-amber-400 mb-3"></i><p>AWS</p></div><div class="skill-card-back"><p class="font-semibold text-lg">Foundational</p></div></div>
+                    <div class="skill-card reveal-delay-4"><div class="skill-card-front"><i class="fab fa-microsoft text-5xl text-amber-400 mb-3"></i><p>Microsoft Azure</p></div><div class="skill-card-back"><p class="font-semibold text-lg">Foundational</p></div></div>
+                    <div class="skill-card reveal-delay-5"><div class="skill-card-front"><i class="fas fa-cogs text-5xl text-amber-400 mb-3"></i><p>REST APIs</p></div><div class="skill-card-back"><p class="font-semibold text-lg">Intermediate</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Soft Skills Section -->
+        <section id="soft-skills" class="section">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title reveal">Soft Skills</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                    <div class="soft-skill-card reveal"><div class="p-4 text-center"><i class="fas fa-comments text-4xl text-amber-400 mb-3"></i><h3 class="font-semibold text-lg text-slate-100">Communication</h3><p class="text-sm text-slate-400 mt-1">Fluent in English, Telugu, and Tamil, enabling clear and effective collaboration in diverse teams.</p></div></div>
+                    <div class="soft-skill-card reveal-delay-1"><div class="p-4 text-center"><i class="fas fa-users text-4xl text-amber-400 mb-3"></i><h3 class="font-semibold text-lg text-slate-100">Teamwork</h3><p class="text-sm text-slate-400 mt-1">Experienced in working collaboratively on projects, contributing to a positive and productive team environment.</p></div></div>
+                    <div class="soft-skill-card reveal-delay-2"><div class="p-4 text-center"><i class="fas fa-lightbulb text-4xl text-amber-400 mb-3"></i><h3 class="font-semibold text-lg text-slate-100">Problem-Solving</h3><p class="text-sm text-slate-400 mt-1">Adept at analyzing complex technical issues and developing innovative and efficient solutions.</p></div></div>
+                    <div class="soft-skill-card reveal-delay-3"><div class="p-4 text-center"><i class="fas fa-sync-alt text-4xl text-amber-400 mb-3"></i><h3 class="font-semibold text-lg text-slate-100">Adaptability</h3><p class="text-sm text-slate-400 mt-1">Quick to learn and apply new technologies and methodologies in fast-paced development cycles.</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="section">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title reveal">My Experience</h2>
+                <div class="max-w-2xl mx-auto relative timeline pl-10">
+                    <div class="timeline-item pl-8 pb-12 reveal">
+                        <h3 class="text-xl font-semibold text-slate-100">Technical Support Engineer (Vendor Support for GOOGLE)</h3>
+                        <p class="text-amber-400 mb-2">Movate Technologies Pvt Ltd | Apr 2024 - Present</p>
+                        <ul class="list-disc list-inside text-slate-400 space-y-1">
+                            <li>Provide expert technical assistance for enterprise clients.</li>
+                            <li>Collaborate with engineering teams to resolve complex issues.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item pl-8 pb-12 reveal-delay-1">
+                        <h3 class="text-xl font-semibold text-slate-100">Future Skills Expert (FSE) Intern</h3>
+                        <p class="text-amber-400 mb-2">Andhra Pradesh Government Initiative | Jan 2024 - Apr 2024</p>
+                        <ul class="list-disc list-inside text-slate-400 space-y-1">
+                            <li>Trained high school students on emerging technologies like Web 3.0 and Cloud.</li>
+                            <li>Delivered hands-on technical knowledge in colleges and schools.</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item pl-8 pb-12 reveal-delay-2">
+                        <h3 class="text-xl font-semibold text-slate-100">Software Engineer Intern</h3>
+                        <p class="text-amber-400 mb-2">E&ICT Academy, IIT Kanpur | Apr 2022 - Jun 2022</p>
+                        <ul class="list-disc list-inside text-slate-400 space-y-1">
+                            <li>Developed and optimized full-stack applications.</li>
+                            <li>Improved application efficiency by 30% through code refactoring.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="section">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title reveal">Education</h2>
+                <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                    <div class="cert-card reveal">
+                        <i class="fas fa-graduation-cap text-4xl text-amber-400"></i>
+                        <div class="ml-4">
+                            <h3 class="font-semibold text-slate-100">Bachelor of Technology, CSE</h3>
+                            <p class="text-sm text-slate-400">PACE Institute of Technology and Sciences, Ongole</p>
+                            <p class="text-sm text-slate-500">2021 - 2024 | CGPA: 8.17</p>
+                        </div>
+                    </div>
+                    <div class="cert-card reveal-delay-1">
+                        <i class="fas fa-award text-4xl text-amber-400"></i>
+                        <div class="ml-4">
+                            <h3 class="font-semibold text-slate-100">Diploma in Computer Science & Engineering</h3>
+                            <p class="text-sm text-slate-400">Government Polytechnic College, Addanki</p>
+                            <p class="text-sm text-slate-500">2018 - 2021 | Percentage: 78.09%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="section">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title reveal">Licenses & Certifications</h2>
+                <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                    <div class="cert-card reveal flex items-center space-x-4"><i class="fab fa-microsoft text-4xl text-amber-400"></i><div><h3 class="font-semibold text-slate-100">Microsoft Certified: Power BI Data Analyst Associate</h3><p class="text-sm text-slate-400">Microsoft | Issued Apr 2023</p></div></div>
+                    <div class="cert-card reveal-delay-1 flex items-center space-x-4"><i class="fab fa-microsoft text-4xl text-amber-400"></i><div><h3 class="font-semibold text-slate-100">Microsoft Certified: Azure AI Fundamentals</h3><p class="text-sm text-slate-400">Microsoft | Issued May 2023</p></div></div>
+                    <div class="cert-card reveal-delay-2 flex items-center space-x-4"><i class="fab fa-microsoft text-4xl text-amber-400"></i><div><h3 class="font-semibold text-slate-100">Microsoft Certified: Azure Data Fundamentals</h3><p class="text-sm text-slate-400">Microsoft | Issued May 2023</p></div></div>
+                    <div class="cert-card reveal-delay-3 flex items-center space-x-4"><i class="fab fa-microsoft text-4xl text-amber-400"></i><div><h3 class="font-semibold text-slate-100">Microsoft Certified: Azure Fundamentals</h3><p class="text-sm text-slate-400">Microsoft | Issued May 2023</p></div></div>
+                    <div class="cert-card reveal flex items-center space-x-4"><i class="fas fa-database text-4xl text-amber-400"></i><div><h3 class="font-semibold text-slate-100">Oracle Cloud Data Management 2023 Foundations Associate</h3><p class="text-sm text-slate-400">Oracle | Issued Aug 2023</p></div></div>
+                    <div class="cert-card reveal-delay-1 flex items-center space-x-4"><i class="fab fa-aws text-4xl text-amber-400"></i><div><h3 class="font-semibold text-slate-100">AWS Academy Graduate - Cloud Foundations</h3><p class="text-sm text-slate-400">Amazon Web Services | Issued Nov 2022</p></div></div>
+                    <div class="cert-card reveal-delay-2 flex items-center space-x-4"><i class="fas fa-leaf text-4xl text-amber-400"></i><div><h3 class="font-semibold text-slate-100">MongoDB Data Modeling Intro</h3><p class="text-sm text-slate-400">MongoDB | Issued Jun 2024</p></div></div>
+                    <div class="cert-card reveal-delay-3 flex items-center space-x-4"><i class="fab fa-ibm text-4xl text-amber-400"></i><div><h3 class="font-semibold text-slate-100">Python for Data Science</h3><p class="text-sm text-slate-400">IBM | Issued Apr 2023</p></div></div>
+                    <div class="cert-card reveal flex items-center space-x-4"><i class="fab fa-github text-4xl text-amber-400"></i><div><h3 class="font-semibold text-slate-100">GitHub Foundations</h3><p class="text-sm text-slate-400">GitHub | Issued Mar 2025</p></div></div>
+                    <div class="cert-card reveal-delay-1 flex items-center space-x-4"><i class="fas fa-network-wired text-4xl text-amber-400"></i><div><h3 class="font-semibold text-slate-100">CCNA: Enterprise Networking, Security, and Automation</h3><p class="text-sm text-slate-400">Cisco | Issued Feb 2021</p></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title reveal">My Projects</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="project-card reveal">
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <i class="fas fa-folder-open text-4xl text-amber-400"></i>
+                                <a href="https://github.com/AnilKumarRaparla" target="_blank" rel="noopener noreferrer" class="text-2xl text-slate-400 hover:text-amber-400"><i class="fab fa-github"></i></a>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-100 mb-2">Scalable E-Commerce Platform</h3>
+                            <p class="text-slate-400">A high-performance e-commerce website with secure payments and optimized order processing.</p>
+                        </div>
+                        <div class="bg-slate-900 p-4 text-xs text-slate-400 flex flex-wrap"><span class="mr-3">PHP</span><span class="mr-3">MySQL</span><span>HTML/CSS</span></div>
+                    </div>
+                    <div class="project-card reveal-delay-1">
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-4"><i class="fas fa-folder-open text-4xl text-amber-400"></i><a href="https://github.com/AnilKumarRaparla" target="_blank" rel="noopener noreferrer" class="text-2xl text-slate-400 hover:text-amber-400"><i class="fab fa-github"></i></a></div>
+                            <h3 class="text-xl font-bold text-slate-100 mb-2">Movie Tickets Booking System</h3>
+                            <p class="text-slate-400">A full-stack authentication system with secure user role management and session management.</p>
+                        </div>
+                        <div class="bg-slate-900 p-4 text-xs text-slate-400 flex flex-wrap"><span class="mr-3">Node.js</span><span class="mr-3">MySQL</span><span>Bootstrap</span></div>
+                    </div>
+                    <div class="project-card reveal-delay-2">
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-4"><i class="fas fa-folder-open text-4xl text-amber-400"></i><a href="https://github.com/AnilKumarRaparla/MongoDB-Tutorial" target="_blank" rel="noopener noreferrer" class="text-2xl text-slate-400 hover:text-amber-400"><i class="fab fa-github"></i></a></div>
+                            <h3 class="text-xl font-bold text-slate-100 mb-2">MongoDB Tutorial</h3>
+                            <p class="text-slate-400">A comprehensive tutorial series covering MongoDB fundamentals for developers new to NoSQL.</p>
+                        </div>
+                        <div class="bg-slate-900 p-4 text-xs text-slate-400 flex flex-wrap"><span class="mr-3">MongoDB</span><span class="mr-3">Node.js</span><span>JavaScript</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- College Life Section -->
+        <section id="college-life" class="section">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title reveal">My College Journey</h2>
+                <div class="max-w-3xl mx-auto glass-card reveal-delay-1">
+                    <p class="text-lg text-center text-slate-300">
+                        "My time in college was a period of immense growth, both personally and professionally. It was where theoretical knowledge met practical application. I dove deep into data structures, algorithms, and software engineering principles, but more importantly, I learned how to learn. Collaborating on projects, participating in coding competitions, and engaging with peers and professors taught me the value of teamwork and persistent curiosity. It was a journey that solidified my passion for technology and set the foundation for the engineer I am today."
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="section-title reveal">Get In Touch</h2>
+                <p class="max-w-xl mx-auto text-lg text-slate-400 mb-8 reveal-delay-1">
+                    I'm currently open to new opportunities and collaborations. Whether you have a question or just want to say hi, my inbox is always open. I'll get back to you as soon as possible!
+                </p>
+                <div class="reveal-delay-2">
+                    <a href="mailto:anilkumarraparla@outlook.com" class="btn-primary">Click Here</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-6 text-center text-slate-500 text-sm">
+        <p>Designed & Built by Anil Kumar Raparla</p>
+        <p>&copy; <span id="year"></span> All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date("2023").getFullYear();
+
+        // Scroll to Top Button
+        const toTopButton = document.getElementById('to-top-button');
+        window.onscroll = function () {
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                toTopButton.classList.remove("hidden");
+            } else {
+                toTopButton.classList.add("hidden");
+            }
+        };
+        toTopButton.addEventListener("click", () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // Scroll Reveal Animations
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof ScrollReveal !== 'undefined') {
+                const sr = ScrollReveal({
+                    distance: '100px',
+                    duration: 1500,
+                    easing: 'cubic-bezier(0.5, 0, 0, 1)',
+                    reset: false
+                });
+                
+                sr.reveal('.reveal', { origin: 'bottom' });
+                sr.reveal('.reveal-left', { origin: 'left' });
+                sr.reveal('.reveal-right', { origin: 'right' });
+                sr.reveal('.reveal-delay-1', { origin: 'bottom', delay: 100 });
+                sr.reveal('.reveal-delay-2', { origin: 'bottom', delay: 200 });
+                sr.reveal('.reveal-delay-3', { origin: 'bottom', delay: 300 });
+                sr.reveal('.reveal-delay-4', { origin: 'bottom', delay: 400 });
+                sr.reveal('.reveal-delay-5', { origin: 'bottom', delay: 500 });
+            }
+        });
+    </script>
+</body>
+</html>
